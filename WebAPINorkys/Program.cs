@@ -51,5 +51,5 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 app.MapControllers();
-
+NorkysAPI.Test.TestDB.ProbarConexion();
 app.Run();
