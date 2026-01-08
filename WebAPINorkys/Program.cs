@@ -32,8 +32,16 @@ builder.Services.AddScoped<IDireccionesDAO, DireccionesDAO>();
 builder.Services.AddScoped<IDashboardDAO, DashboardDAO>();
 
 //Agregar Cors
-builder.Services.AddCors(policyBuilder => policyBuilder.AddDefaultPolicy
-(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -49,7 +57,6 @@ app.UseStaticFiles();
 app.UseAuthorization();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-
+app.Urls.Add("http://0.0.0.0:8080");
 app.MapControllers();
-NorkysAPI.Test.TestDB.ProbarConexion();
 app.Run();
