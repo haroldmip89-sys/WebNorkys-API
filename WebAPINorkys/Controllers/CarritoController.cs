@@ -205,33 +205,33 @@ namespace NorkysWebAPI.Controllers
 
         //    return Ok(new { message = "Dirección del carrito actualizada correctamente." });
         //}
-        //[HttpGet("{IdCarrito}")]
-        //public async Task<IActionResult> GetCarritoCompleto(int IdCarrito)
-        //{
-        //    var carrito = await _carritoDAO.GetById(IdCarrito);
-        //    if (carrito == null)
-        //        return NotFound(new { mensaje = "Carrito no encontrado" });
+        [HttpGet("{IdCarrito}")]
+        public async Task<IActionResult> GetCarritoCompleto(int IdCarrito)
+        {
+            var carrito = await _carritoDAO.GetById(IdCarrito);
+            if (carrito == null)
+                return NotFound(new { mensaje = "Carrito no encontrado" });
 
-        //    var items = await _carritoDAO.GetCarritoDetalles(IdCarrito);
+            var items = await _carritoDAO.GetCarritoDetalles(IdCarrito);
 
-        //    var response = new
-        //    {
-        //        carrito.IdCarrito,
-        //        carrito.DNI,
-        //        carrito.NombreCliente,
-        //        carrito.ApellidoCliente,
-        //        carrito.EmailCliente,
-        //        carrito.FechaCreacion,
-        //        carrito.Estado,
-        //        carrito.MetodoPago,
-        //        carrito.LatY,
-        //        carrito.LongX,
-        //        carrito.Total,
-        //        Items = items
-        //    };
+            var response = new
+            {
+                carrito.IdCarrito,
+                carrito.DNI,
+                carrito.NombreCliente,
+                carrito.ApellidoCliente,
+                carrito.EmailCliente,
+                carrito.FechaCreacion,
+                carrito.Estado,
+                carrito.MetodoPago,
+                carrito.LatY,
+                carrito.LongX,
+                carrito.Total,
+                Items = items
+            };
 
-        //    return Ok(response);
-        //}
+            return Ok(response);
+        }
         // Listado de carritos por estado
         [HttpGet]
         public async Task<IActionResult> GetCarritosPorEstado([FromQuery] string estado)
