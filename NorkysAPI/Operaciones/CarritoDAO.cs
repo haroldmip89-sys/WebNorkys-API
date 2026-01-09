@@ -146,7 +146,14 @@ namespace NorkysAPI.Operaciones
     decimal? LongX,
     List<DetalleCarritoDTO> detalles)
         {
-            await using var conn = new NpgsqlConnection("Host=localhost;Database=Norkys;Username=postgres;Password=123");
+            await using var conn = new NpgsqlConnection(
+    "Host=dpg-d5fldc7pm1nc73dgfut0-a.virginia-postgres.render.com;" +
+    "Port=5432;" +
+    "Database=Norkys;" +
+    "Username=norkys_user;" +
+    "Password=Xev6PVWRexAmN7pwFlkRJTkLDG7d0UbA;" +
+    "SSL Mode=Require;Trust Server Certificate=true"
+);
 
             await conn.OpenAsync();
 
